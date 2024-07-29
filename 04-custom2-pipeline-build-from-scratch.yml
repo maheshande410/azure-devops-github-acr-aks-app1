@@ -68,4 +68,4 @@ stages:
             manifests: '$(Pipeline.Workspace)/drop/01-Deployment-and-LoadBalancer-Service.yml'
             containers: 'acrmahesh.azurecr.io/custom2aksnginxapp1/$(Build.BuildId)'
             imagePullSecrets: 'dev-aksdevopsacr-secret'
-            rolloutStatusTimeout: '10'
+            
