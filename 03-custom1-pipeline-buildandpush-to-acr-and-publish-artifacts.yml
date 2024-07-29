@@ -42,7 +42,7 @@ stages:
         SourceFolder: '$(Build.SourcesDirectory)/Git-Repository-files/kube-manifests'
         Contents: '**'
         TargetFolder: '$(System.DefaultWorkingDirectory)/kube-manifests'
-    - bash: echo After copying to Build Artifact Directory; ls -R $(Build.ArtifactStagingDirectory)
+  #  - bash: echo After copying to Build Artifact Directory; ls -R $(Build.ArtifactStagingDirectory)
 
     - task: PublishBuildArtifacts@1
       inputs:
