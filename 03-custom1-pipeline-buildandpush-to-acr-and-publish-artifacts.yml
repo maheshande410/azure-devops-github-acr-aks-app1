@@ -39,7 +39,7 @@ stages:
     # Docker
     - task: CopyFiles@2
       inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)/kube-manifests'
+        SourceFolder: '$(Build.SourcesDirectory)/Git-Repository-files/kube-manifests'
         Contents: '**'
         TargetFolder: '$(System.DefaultWorkingDirectory)/kube-manifests'
     - bash: echo After copying to Build Artifact Directory; ls -R $(Build.ArtifactStagingDirectory)
