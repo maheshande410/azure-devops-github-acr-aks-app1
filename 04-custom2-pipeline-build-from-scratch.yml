@@ -40,6 +40,24 @@ stages:
           inputs:
             buildType: 'current'
             targetPath: '$(Pipeline.Workspace)'
+  - stage: Deploy  
+    displayName: Deploy Stage  
+    jobs:
+      - job: Deploy
+        displayName: Deploy Job
+        pool:
+          name: custompool
+        steps: 
+        
+        - task: KubernetesManifest@1
+          inputs:
+            action: 'createSecret'
+            connectionType: 'kubernetesServiceConnection'
+            kubernetesServiceConnection: 'dev-ns-k8s-aks-svc-conn'
+            namespace: 'dev'
+            secretType: 'dockerRegistry'
+            secretName: 'dev-aksdevopsacr-secret'
+            dockerRegistryEndpoint: 'acrmahesh'
         
         - task: KubernetesManifest@1
           inputs:
@@ -47,6 +65,7 @@ stages:
             connectionType: 'kubernetesServiceConnection'
             kubernetesServiceConnection: 'dev-ns-k8s-aks-svc-conn'
             namespace: 'dev'
-            manifests: '$(Build.ArtifactStagingDirectory)'
-  
+            manifests: '$(Pipeline.Workspace)'
+            containers: 'acrmahesh.azurecr.io/custom2aksnginxapp1/$(Build.BuildId)'
+            imagePullSecrets: 'dev-aksdevopsacr-secret'
 
